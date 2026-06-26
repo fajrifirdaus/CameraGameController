@@ -1,4 +1,4 @@
-# Body Motion Controller untuk Subway Surfers — Setup Guide
+# Body Motion Controller untuk Subway Surfers dan Temple Run - Setup Guide
 
 POC ini pakai **webcam + MediaPipe Pose** buat membaca gerakan badan dan mengubahnya jadi tombol keyboard (`left`, `right`, `up`, `down`) yang dikirim ke game:
 
@@ -12,9 +12,9 @@ POC ini pakai **webcam + MediaPipe Pose** buat membaca gerakan badan dan menguba
 
 - Webcam yang berfungsi (laptop bawaan atau eksternal).
 - Berdiri kira-kira **1.5–2.5 meter** dari kamera, posisikan kamera setinggi dada, supaya bahu sampai pinggul kelihatan penuh di frame.
-- **Beri ruang ke atas kepala** — pastikan saat tangan diangkat lurus ke atas, pergelangan tangan masih kelihatan jelas di dalam frame (tidak terpotong di tepi atas). Ini penting buat akurasi deteksi lompat/turun.
+- **Beri ruang ke atas kepala** - pastikan saat tangan diangkat lurus ke atas, pergelangan tangan masih kelihatan jelas di dalam frame (tidak terpotong di tepi atas). Ini penting buat akurasi deteksi lompat/turun.
 - Ruang gerak ke kiri/kanan secukupnya buat geser badan.
-- Pencahayaan cukup — hindari posisi membelakangi jendela/lampu (backlit), karena bikin model kurang yakin membaca posisi tangan.
+- Pencahayaan cukup - hindari posisi membelakangi jendela/lampu (backlit), karena bikin model kurang yakin membaca posisi tangan.
 
 ---
 
@@ -59,9 +59,9 @@ pip install -r requirements.txt
 ```
 
 Ini akan install:
-- `opencv-python` — capture & tampilkan video webcam
-- `mediapipe` — deteksi pose/landmark tubuh
-- `pyautogui` — simulasi keypress ke game
+- `opencv-python` - capture & tampilkan video webcam
+- `mediapipe` - deteksi pose/landmark tubuh
+- `pyautogui` - simulasi keypress ke game
 
 Proses ini bisa makan waktu beberapa menit (mediapipe ukurannya cukup besar).
 
@@ -71,8 +71,7 @@ Proses ini bisa makan waktu beberapa menit (mediapipe ukurannya cukup besar).
 
 ## 4. Siapkan game-nya
 
-- Kalau target kamu Subway Surfers versi **browser** (misal di poki.com atau situs sejenis): buka di browser, posisikan window-nya supaya kelihatan dan **klik di area game dulu** supaya fokus keyboard ada di situ.
-- Kalau target versi **APK/emulator Android**: pendekatan ini (`pyautogui` simulate keyboard) tidak langsung berlaku, perlu metode lain (ADB input injection) — kabari saya kalau ternyata ini target client-nya, beda implementasinya.
+- Kalau target kamu Subway Surfers/Temple Run versi **browser** (misal di poki.com atau situs sejenis): buka di browser, posisikan window-nya supaya kelihatan dan **klik di area game dulu** supaya fokus keyboard ada di situ.
 
 ---
 
@@ -82,7 +81,7 @@ Proses ini bisa makan waktu beberapa menit (mediapipe ukurannya cukup besar).
 python main.py
 ```
 
-> **Catatan:** MediaPipe baru-baru ini menghapus API lama (`mp.solutions.pose`) dan menggantinya dengan API baru bernama **MediaPipe Tasks**. Script `main.py` di sini sudah memakai API baru tersebut. Saat **pertama kali** dijalankan, script akan otomatis mendownload file model `pose_landmarker_lite.task` (sekitar 5-10MB) — pastikan komputer kamu terkoneksi internet saat menjalankan untuk pertama kali. Setelah file model itu tersimpan di folder yang sama dengan `main.py`, run selanjutnya tidak perlu internet lagi.
+> **Catatan:** MediaPipe baru-baru ini menghapus API lama (`mp.solutions.pose`) dan menggantinya dengan API baru bernama **MediaPipe Tasks**. Script `main.py` di sini sudah memakai API baru tersebut. Saat **pertama kali** dijalankan, script akan otomatis mendownload file model `pose_landmarker_lite.task` (sekitar 5-10MB) - pastikan komputer kamu terkoneksi internet saat menjalankan untuk pertama kali. Setelah file model itu tersimpan di folder yang sama dengan `main.py`, run selanjutnya tidak perlu internet lagi.
 
 Akan muncul window kamera dengan overlay skeleton tubuh kamu.
 
@@ -114,7 +113,7 @@ Kalau gerakan terasa kurang sensitif / terlalu sensitif, buka `main.py`, edit ba
 | `ACTION_COOLDOWN` | jarak waktu minimal antar-trigger lompat/turun | turunkan (bisa trigger lebih rapat) | naikkan (jeda lebih lama antar aksi) |
 | `CONSECUTIVE_FRAMES_NEEDED` | anti-getar/noise untuk kiri/kanan & gesture tangan | turunkan (respon lebih cepat) | naikkan (lebih stabil, agak lambat) |
 
-> Window kamera sekarang menampilkan garis abu-abu (tinggi bahu) dan garis putih putus-putus (ambang batas trigger tangan) — titik tangan kanan jadi **hijau** dan titik tangan kiri jadi **oranye** begitu melewati garis putih itu. Posisikan diri supaya garis putih itu jelas terlihat di antara bahu dan posisi tangan terangkat, lalu sesuaikan `HANDS_UP_MARGIN_RATIO` sambil lihat reaksinya secara real-time.
+> Window kamera sekarang menampilkan garis abu-abu (tinggi bahu) dan garis putih putus-putus (ambang batas trigger tangan) - titik tangan kanan jadi **hijau** dan titik tangan kiri jadi **oranye** begitu melewati garis putih itu. Posisikan diri supaya garis putih itu jelas terlihat di antara bahu dan posisi tangan terangkat, lalu sesuaikan `HANDS_UP_MARGIN_RATIO` sambil lihat reaksinya secara real-time.
 
 Kalibrasi ulang (`c`) tiap kali posisi berdiri/jarak ke kamera berubah.
 
@@ -125,19 +124,19 @@ Kalibrasi ulang (`c`) tiap kali posisi berdiri/jarak ke kamera berubah.
 | Masalah | Solusi |
 |---|---|
 | `ModuleNotFoundError: No module named 'cv2'` | Jalankan ulang `pip install -r requirements.txt`, pastikan venv aktif |
-| `AttributeError: module 'mediapipe' has no attribute 'solutions'` | Ini bukan bug di script kamu — Google menghapus API lama tersebut di rilis mediapipe terbaru. Pastikan kamu pakai `main.py` versi terbaru dari project ini (sudah memakai API baru "MediaPipe Tasks"), bukan versi lama |
+| `AttributeError: module 'mediapipe' has no attribute 'solutions'` | Ini bukan bug di script kamu - Google menghapus API lama tersebut di rilis mediapipe terbaru. Pastikan kamu pakai `main.py` versi terbaru dari project ini (sudah memakai API baru "MediaPipe Tasks"), bukan versi lama |
 | Gagal download model otomatis / `URLError` saat pertama run | Pastikan ada koneksi internet. Kalau tetap gagal, download manual file `pose_landmarker_lite.task` dari link yang ditampilkan di error, lalu letakkan di folder yang sama dengan `main.py` |
-| Gagal install mediapipe / `No matching distribution found` | Python kamu kemungkinan terlalu baru/lama — pakai Python 3.10/3.11 |
+| Gagal install mediapipe / `No matching distribution found` | Python kamu kemungkinan terlalu baru/lama - pakai Python 3.10/3.11 |
 | Webcam tidak terdeteksi / error saat `cv2.VideoCapture` | Ganti `CAM_INDEX = 0` jadi `1` atau `2` di `main.py` |
 | Window game tidak merespon tombol | Klik dulu di area game supaya jadi window aktif/fokus sebelum bergerak |
 | Posisi kiri/kanan ke-trigger terus-menerus | Naikkan `HORIZONTAL_THRESHOLD`, atau kalibrasi ulang di posisi lebih stabil |
 | Tangan kanan ke-trigger tombol `down`, tangan kiri ke-trigger tombol `up` (kebalik) | Tukar nilai `USER_RIGHT_WRIST` dan `USER_LEFT_WRIST` di `main.py` (lihat catatan di langkah 5) |
-| Posisi tidak balik ke tengah saat badan digeser balik ke tengah | Pastikan pakai `main.py` versi terbaru — versi lama belum menangani transisi balik ke tengah |
+| Posisi tidak balik ke tengah saat badan digeser balik ke tengah | Pastikan pakai `main.py` versi terbaru - versi lama belum menangani transisi balik ke tengah |
 | Mau hentikan paksa kalau program "nyangkut" | Geser mouse cepat ke pojok kiri-atas layar (PyAutoGUI failsafe akan stop) |
 
 ---
 
 ## Catatan untuk pengembangan lanjut (kalau perlu dipresentasikan ke client)
 
-- Logic deteksi saat ini berbasis **threshold sederhana** dari landmark bahu & pinggul — cukup buat demo/POC, real-time, dan ringan (jalan di CPU biasa).
+- Logic deteksi saat ini berbasis **threshold sederhana** dari landmark bahu & pinggul - cukup buat demo/POC, real-time, dan ringan (jalan di CPU biasa).
 - Untuk versi produksi, bisa ditambah: smoothing (moving average) biar lebih halus, kalibrasi otomatis di awal (auto-detect beberapa detik pertama sebagai baseline), atau ganti target ke versi APK kalau ternyata dibutuhkan integrasi langsung ke aplikasi mobile.
