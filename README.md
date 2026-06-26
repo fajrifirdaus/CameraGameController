@@ -1,6 +1,6 @@
-# Body Motion Controller untuk Subway Surfers dan Temple Run - Setup Guide
+# Canera Body Motion Controller untuk Subway Surfers dan Temple Run - Panduan Setup
 
-POC ini pakai **webcam + MediaPipe Pose** buat membaca gerakan badan dan mengubahnya jadi tombol keyboard (`left`, `right`, `up`, `down`) yang dikirim ke game:
+POC (Proof of Concept) ini pakai **webcam + MediaPipe Pose** buat membaca gerakan badan dan mengubahnya jadi tombol keyboard (`left`, `right`, `up`, `down`) yang dikirim ke game:
 
 - Geser badan kiri/kanan/balik ke tengah → tombol `left` / `right`
 - **Tangan kanan** diangkat ke atas (melebihi bahu) → tombol `up` (lompat)
@@ -54,7 +54,12 @@ Kalau berhasil, akan muncul `(venv)` di depan prompt terminal kamu.
 Pastikan file `main.py` dan `requirements.txt` ada di folder yang sama, lalu masuk ke folder itu di terminal:
 
 ```bash
-cd path/ke/folder/subway_motion_poc
+cd path/ke/folder/Camera_Game_Controller
+```
+
+lalu
+
+```bash
 pip install -r requirements.txt
 ```
 
