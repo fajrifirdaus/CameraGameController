@@ -1,4 +1,4 @@
-# Canera Body Motion Controller untuk Subway Surfers dan Temple Run - Panduan Setup
+# Camera Body Motion Controller untuk Subway Surfers dan Temple Run - Panduan Penggunaan
 
 POC (Proof of Concept) ini pakai **webcam + MediaPipe Pose** buat membaca gerakan badan dan mengubahnya jadi tombol keyboard (`left`, `right`, `up`, `down`) yang dikirim ke game:
 
